@@ -1,0 +1,27 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5rem 2rem;
+
+    background-color: var(--primary-200);
+}
+
+nav>.title {
+    display: flex;
+    gap: 1rem;
+}
+
+.theme-button-container {
+    position: relative;
+}
+
+.theme-switch {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    appearance: none;
+}
