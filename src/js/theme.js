@@ -26,8 +26,6 @@ function switchTheme(themeButton, sun, moon) {
         sun.classList.remove("hide");
         moon.classList.add("hide");
     }
-
-    console.log('l');
 }
 
 export { setTheme, switchTheme }

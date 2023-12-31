@@ -1,0 +1,77 @@
+main {
+    width: 100%;
+    height: calc(100% - 5rem);
+    display: flex;
+}
+
+.boards-section {
+    flex: 1;
+    background-color: var(--background-100);
+}
+
+.boards-section>.title {
+    padding: 0.5rem 0.5rem;
+    height: calc(3rem - 3pt);
+    font-size: x-large;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-right: 3pt solid var(--accent-400);
+    border-bottom: 3pt solid var(--accent-400);
+    border-radius: 0 0 1rem 0;
+}
+
+.add-board-button {
+    cursor: pointer;
+}
+
+.add-board-button>path {
+    color: var(--accent-400);
+}
+
+.board-cards-container {
+    padding: 1rem 0;
+    height: calc(100% - 6rem);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+
+    overflow-y: auto;
+}
+
+.board-cards-container::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.board-cards-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-500);
+    border-radius: 1rem;
+}
+
+.board-card {
+    user-select: none;
+    padding: 0.5rem 0.5rem;
+    width: calc(100% - 2rem);
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    cursor: pointer;
+    background-color: var(--primary-400);
+    border-radius: 1rem;
+}
+
+.board-card:hover {
+    background-color: rgb(from var(--primary-500) r g b / 50%);
+}
+
+.lists-section {
+    flex: 3;
+    background-color: var(--background-50);
+}

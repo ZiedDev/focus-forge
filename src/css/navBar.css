@@ -3,18 +3,33 @@ nav {
     justify-content: space-between;
     align-items: center;
 
-    padding: 0.5rem 2rem;
+    height: calc(5rem - 3pt);
+    border-bottom: 3pt solid var(--accent-400);
 
-    background-color: var(--primary-200);
+    background-color: var(--primary-400);
 }
 
 nav>.title {
+    padding-left: 3rem;
     display: flex;
+    align-items: baseline;
     gap: 1rem;
+}
+
+
+nav>.title>h1 {
+    font-size: xx-large;
 }
 
 .theme-button-container {
     position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 5rem;
+    height: 5rem;
 }
 
 .theme-switch {
@@ -24,4 +39,9 @@ nav>.title {
     height: 100%;
 
     appearance: none;
+    cursor: pointer;
+}
+
+.theme-switch:hover {
+    background-color: rgb(from var(--primary-400) r g b / 30%);
 }

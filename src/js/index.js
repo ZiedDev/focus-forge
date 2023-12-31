@@ -2,11 +2,12 @@ import { setTheme, switchTheme } from './theme.js'
 
 import '../css/style.css'
 import '../css/navBar.css'
+import '../css/main.css'
 
-const themeSwitch = document.getElementById('theme-switch');
+// Theme Changer
+const themeSwitch = document.getElementById('theme-switch')
+setTheme(themeSwitch, sun, moon)
+themeSwitch.addEventListener('change', (e) => { switchTheme(e.target, sun, moon) })
 
+// rest of the logic
 console.log('It is working :)')
-
-setTheme(themeSwitch, sun, moon);
-
-themeSwitch.addEventListener('change', () => { switchTheme(themeSwitch, sun, moon) })
