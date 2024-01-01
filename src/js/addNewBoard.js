@@ -1,7 +1,7 @@
-function createANewBoard(boardName, boardId) {
+function createBoard(boardName, boardId) {
     let board = document.createElement('div')
     board.classList.add('board-card')
-    // board.id = bookId
+    board.id = boardId
 
     let name = document.createElement('h2')
     name.textContent = boardName
@@ -64,4 +64,4 @@ function updateLists(id, boardId, key, newValue) {
 
 function binarySearch(arr,id,boardId=null){/*one liner goes brrrrr*/let start=0;let end=arr.length-1;while(start<end){let mid=parseInt(Math.floor((start+end)/2));if(boardId==null){if(arr[mid].id<id){start=mid+1}else{end=mid}}else{if(arr[mid].boardId<boardId){start=mid+1}else if(arr[mid].boardId>boardId){end=mid}else{if(arr[mid].id<id){start=mid+1}else{end=mid}}}}return [end, arr[end]]}
 
-export { createANewBoard, readFromBoards, updateBoards, readFromTasks, updateLists }
+export { createBoard, readFromBoards, updateBoards, readFromTasks, updateLists }
