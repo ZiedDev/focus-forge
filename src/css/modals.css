@@ -16,6 +16,35 @@
     padding: 2rem;
     background-color: var(--background-50);
     border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    animation: zoomIn forwards 100ms ease-out;
+}
+
+.modal>div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal input,
+.modal>button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: solid 3pt var(--accent-300);
+
+    font-size: large;
+
+    outline: none;
+}
+
+.modal>button {
+    cursor: pointer;
 }
 
 .backdrop {
@@ -26,4 +55,26 @@
     right: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
+
+    animation: fadeId forwards 100ms;
+}
+
+@keyframes fadeId {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        scale: 0;
+    }
+
+    to {
+        scale: 1;
+    }
 }

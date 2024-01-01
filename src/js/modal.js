@@ -11,8 +11,10 @@ function createModal(title, inputs, submitButtonBehavior) {
     modalContainer.appendChild(modal)
     modalContainer.appendChild(backdrop)
     modal.appendChild(modalTitle)
-    
+
     for (let i = 0; i < inputs.length; i++) {
+        const inputContainer = document.createElement('div')
+
         const inputTitle = document.createElement('h2')
         inputTitle.textContent = inputs[i].title
 
@@ -20,8 +22,10 @@ function createModal(title, inputs, submitButtonBehavior) {
         input.type = inputs[i].type
         input.id = inputs[i].id
 
-        modal.appendChild(inputTitle)
-        modal.appendChild(input)
+        inputContainer.appendChild(inputTitle)
+        inputContainer.appendChild(input)
+
+        modal.appendChild(inputContainer)
     }
 
     modal.appendChild(submitButton)
@@ -31,11 +35,11 @@ function createModal(title, inputs, submitButtonBehavior) {
     modal.classList.add('modal')
     backdrop.classList.add('backdrop')
 
-    backdrop.addEventListener('click' , () => {
+    backdrop.addEventListener('click', () => {
         modalContainer.parentNode.removeChild(modalContainer)
     })
 
-    submitButton.addEventListener('click' , () => {
+    submitButton.addEventListener('click', () => {
         submitButtonBehavior()
         modalContainer.parentNode.removeChild(modalContainer)
     })

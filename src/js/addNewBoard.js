@@ -1,3 +1,5 @@
+import { binarySearch } from './binarySearch.js'
+
 function createBoard(boardName, boardId) {
     let board = document.createElement('div')
     board.classList.add('board-card')
@@ -15,9 +17,7 @@ function readFromBoards(id) {
 
     const boards = JSON.parse(localStorage.boards)
 
-    boards.sort((a, b) => a.id - b.id)
-
-    return binarySearch(boards, id)[1]
+    return binarySearch(boards, 'id', id)[1]
 }
 
 function updateBoards(id, key, newValue) {
@@ -25,9 +25,7 @@ function updateBoards(id, key, newValue) {
 
     const boards = JSON.parse(localStorage.boards)
 
-    boards.sort((a, b) => a.id - b.id)
-
-    const index = binarySearch(boards, id)[0]
+    const index = binarySearch(boards, 'id', id)[0]
 
     boards[index][key] = newValue
 
@@ -39,11 +37,7 @@ function readFromTasks(id, boardId) {
 
     const tasks = JSON.parse(localStorage.tasks)
 
-    tasks.sort((a, b) => a.boardId - b.boardId)
-
-    tasks.sort((a, b) => a.id - b.id)
-
-    return binarySearch(tasks, id, boardId)[1]
+    return binarySearch(tasks, 'id', id, 'boardId', boardId)[1]
 }
 
 function updateLists(id, boardId, key, newValue) {
@@ -51,17 +45,11 @@ function updateLists(id, boardId, key, newValue) {
 
     const tasks = JSON.parse(localStorage.tasks)
 
-    tasks.sort((a, b) => a.boardId - b.boardId)
-
-    tasks.sort((a, b) => a.id - b.id)
-
-    const index = binarySearch(tasks, id, boardId)[0]
+    const index = binarySearch(tasks, 'id', id, 'boardId', boardId)[0]
 
     tasks[index][key] = newValue
 
     localStorage.tasks = JSON.stringify(tasks)
 }
-
-function binarySearch(arr,id,boardId=null){/*one liner goes brrrrr*/let start=0;let end=arr.length-1;while(start<end){let mid=parseInt(Math.floor((start+end)/2));if(boardId==null){if(arr[mid].id<id){start=mid+1}else{end=mid}}else{if(arr[mid].boardId<boardId){start=mid+1}else if(arr[mid].boardId>boardId){end=mid}else{if(arr[mid].id<id){start=mid+1}else{end=mid}}}}return [end, arr[end]]}
 
 export { createBoard, readFromBoards, updateBoards, readFromTasks, updateLists }
