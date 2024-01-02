@@ -1,5 +1,4 @@
 function createModal(title, inputs, submitButtonBehavior) {
-    // declaring all the elements
     const modalContainer = document.createElement('div')
     const modal = document.createElement('div')
     const backdrop = document.createElement('div')
@@ -30,7 +29,6 @@ function createModal(title, inputs, submitButtonBehavior) {
 
     modal.appendChild(submitButton)
 
-    // adding the classes    
     modalContainer.classList.add('modal-container')
     modal.classList.add('modal')
     backdrop.classList.add('backdrop')
