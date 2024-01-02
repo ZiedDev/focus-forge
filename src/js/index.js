@@ -4,7 +4,7 @@ import { binarySearch } from './binarySearch.js'
 import { chooseABoardImage } from './media.js'
 
 import { createBoard, readFromBoards, updateBoards } from './boards.js'
-import { createTask, readFromTasks, updateTasks, loadTasks } from './tasks.js';
+import { createTask, readFromTasks, updateTasks, loadTasks, emptyBoardTip } from './tasks.js';
 
 import '../css/style.css'
 import '../css/navBar.css'
@@ -25,11 +25,7 @@ const tasksCardsContainer = document.getElementById('tasks-cards-container')
 let currentBoard = 0;
 
 // Images
-document.getElementById('chooseABoard').appendChild(chooseABoardImage)
-
-const imageDescription = document.createElement('h2')
-imageDescription.textContent = 'Choose a board'
-document.getElementById('chooseABoard').appendChild(imageDescription)
+tasksCardsContainer.appendChild(emptyBoardTip('Choose a Board', chooseABoardImage))
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.boards == undefined) localStorage.setItem('boards', '[]')
@@ -38,12 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const boards = JSON.parse(localStorage.boards)
 
     for (let i = 0; i < boards.length; i++) {
-        boardCardsContainer.appendChild(createBoard(boards[i].name, boards[i].id, () =>
-            loadTasks(boards[i].id, tasksCardsContainer, currentBoard = boards[i].id)))
-    }
+        boardCardsContainer.appendChild(createBoard(boards[i].name, boards[i].id, () => {
+            loadTasks(boards[i].id, tasksCardsContainer, () => tasksCardsContainer.appendChild(emptyBoardTip('Oops! No tasks here', chooseABoardImage)))
 
+            currentBoard = boards[i].id
+        }))
+    }
 })
 
+// Add Board
 addBoardButton.addEventListener('click', () => {
     document.body.appendChild(createModal('Create Board', [{ title: 'Name', type: 'text', id: 'board-name' }], () => {
         const boards = JSON.parse(localStorage.boards)
@@ -53,7 +52,12 @@ addBoardButton.addEventListener('click', () => {
 
         if (boardName != '') {
             while (binarySearch(boards, 'id', boardId) == null) boardId = Math.floor(Math.random() * 99999)
-            boardCardsContainer.appendChild(createBoard(boardName, boardId, () => loadTasks(boardId, tasksCardsContainer), currentBoard = boardId))
+
+            boardCardsContainer.appendChild(createBoard(boards[i].name, boards[i].id, () => {
+                loadTasks(boardId, tasksCardsContainer, () => tasksCardsContainer.appendChild(emptyBoardTip('Oops! No tasks here', chooseABoardImage)))
+
+                currentBoard = boardId
+            }))
 
             boards.push({ name: boardName, id: boardId })
 
@@ -62,21 +66,25 @@ addBoardButton.addEventListener('click', () => {
     }))
 })
 
+// Add Task
 addTaskButton.addEventListener('click', () => {
     if (currentBoard != 0) {
         document.body.appendChild(createModal('Create Task', [{ title: 'Name', type: 'text', id: 'task-name' }, { title: 'Description', type: 'text', id: 'task-description' }, { title: 'Due Date ', type: 'date', id: 'task-dueDate' }, { title: 'Priority ', type: 'number', id: 'task-priority' }], () => {
             const tasks = JSON.parse(localStorage.tasks)
 
             const taskName = document.getElementById('task-name').value
+            const taskDescription = document.getElementById('task-description').value
+            const taskDueDate = document.getElementById('task-dueDate').value
+            const taskPriority = document.getElementById('task-priority').value
+
             let taskId = Math.floor(Math.random() * 99999)
 
-            if (taskName != '') {
+            if (taskName != '' && taskName != '' && taskDescription != '' && taskDueDate != '' && taskPriority != '') {
                 while (binarySearch(tasks, 'id', taskId) == null) taskId = Math.floor(Math.random() * 99999)
                 tasksCardsContainer.appendChild(createTask(taskName, taskId))
 
-                tasks.push({ title: taskName, boardId: currentBoard, id: taskId })
+                tasks.push({ title: taskName, boardId: currentBoard, id: taskId, description: taskDescription, taskDueDate: taskDueDate, taskPriority: taskPriority, taskDone: false })
 
-                console.log(tasks)
 
                 localStorage.tasks = JSON.stringify(tasks)
             }

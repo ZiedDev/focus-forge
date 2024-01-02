@@ -3,13 +3,13 @@ import { binarySearch } from './binarySearch.js'
 function createBoard(boardName, boardId, boardOnClickEvent) {
     let board = document.createElement('div')
     board.classList.add('board-card')
-    board.id = boardId
+    board.id = `board-${boardId}`
 
     let name = document.createElement('h2')
     name.textContent = boardName
     board.appendChild(name)
 
-    board.addEventListener('click', () => boardOnClickEvent(), console.log('l'))
+    board.addEventListener('click', () => boardOnClickEvent())
 
     return board;
 }

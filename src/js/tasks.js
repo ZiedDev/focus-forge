@@ -4,7 +4,7 @@ import { checkSVG, dottedCircleSVG } from './media.js'
 function createTask(taskName, taskId) {
     const task = document.createElement('div')
     task.classList.add('task-card')
-    task.id = taskId
+    task.id = `task-${taskId}`
 
     const name = document.createElement('h2')
     name.textContent = taskName
@@ -48,13 +48,17 @@ function updateTasks(id, boardId, key, newValue) {
     localStorage.tasks = JSON.stringify(tasks)
 }
 
-function loadTasks(boardId, tasksCardsContainer) {
+function loadTasks(boardId, tasksCardsContainer, noTasksBehavior) {
     tasksCardsContainer.innerHTML = ''
 
     const tasks = JSON.parse(localStorage.tasks).filter((task) => task.boardId == boardId)
 
     for (let i = 0; i < tasks.length; i++) {
         tasksCardsContainer.appendChild(createTask(tasks[i].title, tasks[i].id))
+    }
+
+    if (tasks.length == 0) {
+        noTasksBehavior()
     }
 }
 
@@ -68,4 +72,19 @@ function taskDone(unchecked, checked) {
     }
 }
 
-export { createTask, readFromTasks, updateTasks, loadTasks }
+function emptyBoardTip(tip, image) {
+    const container = document.createElement('div')
+
+    container.id = 'chooseABoard'
+    container.classList.add('chooseABoard')
+
+    container.appendChild(image)
+
+    const imageDescription = document.createElement('h2')
+    imageDescription.textContent = tip
+    container.appendChild(imageDescription)
+
+    return container
+}
+
+export { createTask, readFromTasks, updateTasks, loadTasks, emptyBoardTip }
