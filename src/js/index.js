@@ -53,7 +53,7 @@ addBoardButton.addEventListener('click', () => {
         if (boardName != '') {
             while (binarySearch(boards, 'id', boardId) == null) boardId = Math.floor(Math.random() * 99999)
 
-            boardCardsContainer.appendChild(createBoard(boards[i].name, boards[i].id, () => {
+            boardCardsContainer.appendChild(createBoard(boardName, boardId, () => {
                 loadTasks(boardId, tasksCardsContainer, () => tasksCardsContainer.appendChild(emptyBoardTip('Oops! No tasks here', chooseABoardImage)))
 
                 currentBoard = boardId
